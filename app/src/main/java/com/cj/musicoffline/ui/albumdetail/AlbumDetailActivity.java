@@ -41,14 +41,18 @@ public class AlbumDetailActivity extends AppCompatActivity {
 
     private void getList() {
         Intent intent = getIntent();
-        int idAlbum = Integer.parseInt(intent.getStringExtra(Constain.ID_ALBUM));
-        String nameAlbum = intent.getStringExtra(Constain.NAME_ALBUM);
-        mTVNameList.setText(nameAlbum);
-        mViewModel.getAlbumDetail(idAlbum).observe(this, list -> {
-            arrayList.clear();
-            arrayList.addAll(list);
-            adapter.notifyDataSetChanged();
-        });
+        try{
+            int idAlbum = Integer.parseInt(intent.getStringExtra(Constain.ID_ALBUM));
+            String nameAlbum = intent.getStringExtra(Constain.NAME_ALBUM);
+            mTVNameList.setText(nameAlbum);
+            mViewModel.getAlbumDetail(idAlbum).observe(this, list -> {
+                arrayList.clear();
+                arrayList.addAll(list);
+                adapter.notifyDataSetChanged();
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void onSetUp() {
